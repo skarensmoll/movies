@@ -1,0 +1,13 @@
+.Form {
+  max-width: 500px;
+  border: 3px solid white;
+  margin: auto;
+  padding: 32px;
+  border-style: dotted;
+
+  &__Control {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

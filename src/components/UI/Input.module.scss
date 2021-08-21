@@ -1,0 +1,9 @@
+.Input {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  input {
+    min-width: 200px;
+  }
+}

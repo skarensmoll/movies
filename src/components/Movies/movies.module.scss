@@ -6,8 +6,10 @@
 
   &__card {
     min-width: 250px;
-    margin-bottom: 24px;
-    border: 1px solid gray;
+    margin-bottom: 48px;
+    padding: 16px;
+    border-radius: 8px;
+    background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
   }
 
   &__card + &__card {

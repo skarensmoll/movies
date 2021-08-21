@@ -1,7 +1,19 @@
 .App {
   text-align: center;
+  max-width: 1200px;
+  margin: auto;
+}
+
+body {
+  background-color: #101414;
+  color: white;
+  text-align: center;
 }
 
 li {
   list-style: none;
+}
+
+button {
+  border-style: none;
 }
