@@ -1,10 +1,9 @@
 /// using CommonJs modules approach
 
-const MOVIES_API = 'https://swapi.dev/api/films/';
 const FIREBASE_MOVIE_API = 'https://react-my-burger-34f7d.firebaseio.com/movies.json';
 
 exports.getAllMovies = async() => {
-  const response = await fetch(MOVIES_API)
+  const response = await fetch(FIREBASE_MOVIE_API)
   return response.json();
 };
 
@@ -19,4 +18,5 @@ exports.saveMovie = async(movie)=> {
   });
 
   return response.json();
+
 }

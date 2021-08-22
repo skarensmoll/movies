@@ -6,9 +6,9 @@ const Movies = ({ list }) => {
     <ul className={styles.Movies}>
       {list.map(item => {
         return (
-          <li className={styles.Movies__card}>
-            <h3>{item.title}</h3>
-            <span>{item.episode_id}</span>
+          <li key={item.id} className={styles.Movies__card}>
+            <h3>{item.name}</h3>
+            <span>{item.id}</span>
           </li>
         )
       })}

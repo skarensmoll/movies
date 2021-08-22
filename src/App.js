@@ -1,43 +1,42 @@
 import './App.css';
-import React, { useEffect, useState, useCallback } from 'react';
-import { Button } from './components/UI';
-import { Movies, Form } from './components/Movies';
-const moviesModule = require('./backend/movies-api');
+import React, { useEffect, useState } from 'react';
+import { Movies, NewMovie } from './components/Movies';
+import {
+  useMovieRequest,
+  LOAD_MOVIES,
+  SAVE_MOVIE
+} from './hooks/useMovieRequest';
 
 function App() {
   const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(false);
 
-  const loadMovies = useCallback(() => {
-    setLoading(true);
+  const [loading, sendMovieRequest] = useMovieRequest();
 
-    moviesModule.getAllMovies().then(response => {
-      setMovies(response.results);
-    }).catch(e => console.log(e));
-    setLoading(false);
-  }, []);
-
-  const saveMovies = useCallback((newMovie) => {
-    moviesModule.saveMovie(newMovie).then(response => {
-      console.log(response);
-    })
-  }, []);
+  const handleSaveMovie = (newMovie) => {
+    sendMovieRequest(SAVE_MOVIE, () => {
+      setMovies((prevMovies) => {
+        return prevMovies;
+      });
+    }, newMovie);
+  };
 
   useEffect(() => {
-    loadMovies();
-  }, [loadMovies]);
+    sendMovieRequest(LOAD_MOVIES, (movies) => {
+      setMovies(movies);
+    });
+  }, [sendMovieRequest])
+
 
   return (
     <div className="App">
       <header className="App-header"></header>
       <main>
         <section>
-          <Button onClick={() => loadMovies()}>Load Movies </Button>
           {loading && <p>Loading.....</p>}
           {!loading && <Movies list={movies} />}
         </section>
         <section>
-          <Form onSaveMovies={(movie) => { saveMovies(movie); }} />
+          <NewMovie onSaveMovies={(movie) => { handleSaveMovie(movie); }} />
         </section>
       </main>
     </div>
