@@ -7,7 +7,6 @@ const moviesModule = require('../backend/movies-api');
 
 const useMovieRequest = ()=> {
   const [loading, setLoading] = useState(false);
-
   const sendMovieRequest = useCallback((requestType, callback, newMovie) => {
     setLoading(true);
 

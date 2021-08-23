@@ -17,3 +17,7 @@ li {
 button {
   border-style: none;
 }
+
+section {
+  margin-bottom: 80px;
+}

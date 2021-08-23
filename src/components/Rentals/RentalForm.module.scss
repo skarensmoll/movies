@@ -1,0 +1,28 @@
+.RentalForm {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin: auto;
+
+  p {
+    display: none;
+  }
+
+  input {
+    background-color: white;
+  }
+
+
+
+  &--invalid {
+    p {
+      color: red;
+      display: block;
+    }
+
+    input {
+      background-color: rgb(230, 145, 145);
+    }
+  }
+
+}

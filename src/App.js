@@ -6,10 +6,10 @@ import {
   LOAD_MOVIES,
   SAVE_MOVIE
 } from './hooks/useMovieRequest';
+import RentalForm from './components/Rentals/RentalForm';
 
 function App() {
   const [movies, setMovies] = useState([]);
-
   const [loading, sendMovieRequest] = useMovieRequest();
 
   const handleSaveMovie = (newMovie) => {
@@ -37,6 +37,9 @@ function App() {
         </section>
         <section>
           <NewMovie onSaveMovies={(movie) => { handleSaveMovie(movie); }} />
+        </section>
+        <section>
+          <RentalForm />
         </section>
       </main>
     </div>
