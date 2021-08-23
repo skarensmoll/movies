@@ -2,54 +2,51 @@ import React, { useState } from "react";
 import { Button } from "../UI";
 import styles from "./RentalForm.module.scss";
 
+import useInput from '../../hooks/useInput';
+
 const RentalForm = () => {
-  const [renterName, setRenterName] = useState("");
-  const [renterNameTouched, setRenterNameTouched] = useState(false);
 
-  const [renterEmail, setRenterEmail] = useState("");
-  const [renterEmailTouched, setRenterEmailTouched] = useState(false);
+  const [
+    renterName,
+    renterNameValid,
+    renterNameTouched,
+    handleRenterNameBlur,
+    handleRenterNameChange,
+    resetName,
 
-  const isValidRenterNameInput = !(renterName.trim() === "");
+  ] = useInput('', (value) => !(value.trim() === ""));
 
-  const emailValid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
-    renterEmail
-  );
+
+  const [
+    renterEmail,
+    renterEmailValid,
+    renterEmailTouched,
+    handleRenterEmailBlur,
+    handleRenterEmailChange,
+    resetEmail,
+  ] = useInput('', (value)=> {
+    return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+      value
+    );
+  })
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setRenterNameTouched(true);
-    setRenterEmailTouched(true);
-    if (!isValidRenterNameInput && !emailValid) return;
+    if (!renterNameValid && !renterEmailValid) return;
 
-    setRenterName("");
-    setRenterNameTouched(false);
+    resetName();
+    resetEmail();
 
-    setRenterEmail("");
-    setRenterEmailTouched(false);
-  };
-
-  const handleRenterChange = ({ target: { value } }) => {
-    setRenterName(value);
-  };
-  const handleRenterBlur = (e) => {
-    setRenterNameTouched(true);
   };
 
   const rentalFormClass = `${styles.RentalForm}`;
 
-  const handleRenterEmailChange = ({ target: { value } }) => {
-    setRenterEmail(value);
-  };
-
-  const handleRenterEmailBlur = ({ target: { value } }) => {
-    setRenterEmailTouched(true);
-  };
 
   return (
     <form className={rentalFormClass} onSubmit={handleSubmit}>
       <div
         className={`${
-          !isValidRenterNameInput &&
+          !renterNameValid &&
           renterNameTouched &&
           styles["RentalForm--invalid"]
         }`}
@@ -60,15 +57,15 @@ const RentalForm = () => {
           name="renterName"
           type="text"
           value={renterName}
-          onChange={handleRenterChange}
-          onBlur={handleRenterBlur}
+          onChange={handleRenterNameChange}
+          onBlur={handleRenterNameBlur}
         />
         <p>Please enter a name</p>
       </div>
 
       <div
         className={`
-        ${(!emailValid && renterEmailTouched) &&
+        ${(!renterEmailValid && renterEmailTouched) &&
           styles["RentalForm--invalid"]}
         `}
       >
